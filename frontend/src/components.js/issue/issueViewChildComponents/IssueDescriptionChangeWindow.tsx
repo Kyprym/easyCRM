@@ -1,15 +1,33 @@
 import { Box, Button, Modal, Typography } from "@mui/material"
 import { useState } from "react"
 import { eventModalWindowStyle } from "../issueCalendarEventsComponents/createEventCompanent"
+import { useDispatch } from "react-redux"
+import { putIssueDescription } from "../../../DB/issueHTTPmethods"
+import { API_URL } from "../../../DB/DBconfig"
+import { useSelector } from "react-redux"
 
 
-export const IssueDescriptionChangeWindow = ({descriptionText}:{descriptionText:string}) =>{
+
+
+export const IssueDescriptionChangeWindow = ({descriptionText, issueID}:{descriptionText:string, issueID:string}) =>{
     const [changeDescriptionButtonState, setChangeDewscriptionButtonState] = useState<boolean>(false)
+    const [descriptionTextState, setDescriptionState] = useState<string>(descriptionText)
+    const dispatch = useDispatch()
+    const selector = useSelector(state=>state.issue.issue)
+    
+    const issueKeyID:string = selector.issueData[0].id 
+
     const showChangeDescriptionWindow = ():void=>{
         setChangeDewscriptionButtonState(true)
     }
     const closeChangeDescriptionWindow = ():void=>{
         setChangeDewscriptionButtonState(false)
+    }
+
+    const saveChangedDescription = () =>{
+        closeChangeDescriptionWindow()
+        dispatch({type:"ASYNC_CHANGE_ISSUE_DESCRIPTION", payload:descriptionTextState})
+        putIssueDescription(issueID,issueKeyID, descriptionTextState, API_URL)
     }
      
 
@@ -31,7 +49,8 @@ export const IssueDescriptionChangeWindow = ({descriptionText}:{descriptionText:
           </Typography>
           <Typography  sx={{ mt: 2 }}>
             <textarea 
-                value={descriptionText}
+                value={descriptionTextState}
+                onChange={(e)=>{setDescriptionState(e.target.value)}}
                 style={{
                         maxWidth:eventModalWindowStyle.width,
                         width:eventModalWindowStyle.width,
@@ -48,7 +67,7 @@ export const IssueDescriptionChangeWindow = ({descriptionText}:{descriptionText:
                         }}>
                 <Button 
                     variant="contained"
-                    onClick={closeChangeDescriptionWindow}>Сохранить</Button>
+                    onClick={saveChangedDescription}>Сохранить</Button>
                 <Button
                     style={{marginLeft:"0.5rem"}}
                     variant="outlined"

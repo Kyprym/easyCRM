@@ -229,3 +229,99 @@ export const putIssuechangeCardMakingStatus = async (config:mysql.ConnectionOpti
         return false
     }
 }
+
+export const putIssuechangeCity = async (config:mysql.ConnectionOptions, issueID:string, city:string, id:string): Promise<RowDataPacket[] | false > =>{
+    try{
+        const connection: Connection = await mysql.createConnection(config)
+        const [rows]:[RowDataPacket[], object] = await connection.execute(`UPDATE crmstorage.issue_${issueID} SET city = '${city}' WHERE (id = '${id}');
+`)
+        await connection.end()
+        if(rows.length >0){
+            return rows;
+        }else{
+            return false
+        }
+    }catch(error){
+        return false
+    }
+}
+
+export const putIssuechangeAddress = async (config:mysql.ConnectionOptions, issueID:string, address:string, id:string): Promise<RowDataPacket[] | false > =>{
+    try{
+        const connection: Connection = await mysql.createConnection(config)
+        const [rows]:[RowDataPacket[], object] = await connection.execute(`UPDATE crmstorage.issue_${issueID} SET address = '${address}' WHERE (id = '${id}');
+`)
+        await connection.end()
+        if(rows.length >0){
+            return rows;
+        }else{
+            return false
+        }
+    }catch(error){
+        return false
+    }
+}
+
+export const putIssuechangeMilage = async (config:mysql.ConnectionOptions, issueID:string, milage:number, id:string): Promise<RowDataPacket[] | false > =>{
+    try{
+        const connection: Connection = await mysql.createConnection(config)
+        const [rows]:[RowDataPacket[], object] = await connection.execute(`UPDATE crmstorage.issue_${issueID} SET milage = '${milage}' WHERE (id = '${id}');
+`)
+        await connection.end()
+        if(rows.length >0){
+            return rows;
+        }else{
+            return false
+        }
+    }catch(error){
+        return false
+    }
+}
+
+export const putIssuechangeDaysToWork = async (config:mysql.ConnectionOptions, issueID:string, days:number, id:string): Promise<RowDataPacket[] | false > =>{
+    try{
+        const connection: Connection = await mysql.createConnection(config)
+        const [rows]:[RowDataPacket[], object] = await connection.execute(`UPDATE crmstorage.issue_${issueID} SET days_to_work = '${days}' WHERE (id = '${id}');
+`)
+        await connection.end()
+        if(rows.length >0){
+            return rows;
+        }else{
+            return false
+        }
+    }catch(error){
+        return false
+    }
+}
+
+export const putIssueInstallersCount= async (config:mysql.ConnectionOptions, issueID:string, days:number, id:string): Promise<RowDataPacket[] | false > =>{
+    try{
+        const connection: Connection = await mysql.createConnection(config)
+        const [rows]:[RowDataPacket[], object] = await connection.execute(`UPDATE crmstorage.issue_${issueID} SET installers_Count = '${days}' WHERE (id = '${id}');
+`)
+        await connection.end()
+        if(rows.length >0){
+            return rows;
+        }else{
+            return false
+        }
+    }catch(error){
+        return false
+    }
+}
+
+export const putIssueDescription= async (config:mysql.ConnectionOptions, issueID:string, description:string, id:string): Promise<RowDataPacket[] | false > =>{
+    try{
+        const connection: Connection = await mysql.createConnection(config)
+        const [rows]:[RowDataPacket[], object] = await connection.execute(`UPDATE crmstorage.issue_${issueID} SET description = '${description}' WHERE (id = '${id}');
+`)
+        await connection.end()
+        if(rows.length >0){
+            return rows;
+        }else{
+            return false
+        }
+    }catch(error){
+        return false
+    }
+}

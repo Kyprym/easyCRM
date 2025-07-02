@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser'
 import { dbConfig } from './dbConfig';
 import { getASNrelayStatusesTable, getASNStatusesTable, getCardMakingStateTable, getChunckContragent, getContragentID, getEventActionTypes, getEventsStatuses, getFirmsTable, getIssueCalendarEventsTable, getIssueCommentsTable, getIssues, getIssueTable, getIssueWorksStatus, getPayStatusesTable, getProcurementStatusesTable, getProductionStatusTable, getSKIZItatusesTable, getUsers, getUsersLogPassArrFromDB } from './getDataFromDB';
-import { putContrAgentInIssue, addIssueEvent, putIssueFirm, putIssuePaymentStatus, putIssueProductionStatus, putIssueTheme, putWorkStatus, changeIssueEvent, addNewComment, putIssueASNStatus, putIssueASNSrlaytatus, putIssueSKZIstatus, putIssuechangeProcurementStatus, putIssuechangeCardMakingStatus } from './putDataInDB';
+import { putContrAgentInIssue, addIssueEvent, putIssueFirm, putIssuePaymentStatus, putIssueProductionStatus, putIssueTheme, putWorkStatus, changeIssueEvent, addNewComment, putIssueASNStatus, putIssueASNSrlaytatus, putIssueSKZIstatus, putIssuechangeProcurementStatus, putIssuechangeCardMakingStatus, putIssuechangeCity, putIssuechangeAddress, putIssuechangeMilage, putIssuechangeDaysToWork, putIssueInstallersCount, putIssueDescription } from './putDataInDB';
 import { correctDate } from './modules/supportFuncs';
 
 
@@ -165,6 +165,50 @@ app.put('/api/issues/:id/changeCardMakingStatus', async (req, res)=>{
   const issueKeyID = await req.body.issueKeyID
   putIssuechangeCardMakingStatus(dbConfig, issueID, status, issueKeyID)
 })
+
+app.put('/api/issues/:id/changeCityInIssue', async (req, res)=>{
+  const issueID  = await req.params.id
+  const city = await req.body.status
+  const issueKeyID = await req.body.issueKeyID
+  putIssuechangeCity(dbConfig, issueID, city, issueKeyID)
+})
+
+app.put('/api/issues/:id/changeAddressInIssue', async (req, res)=>{
+  const issueID  = await req.params.id
+  const address = await req.body.status
+  const issueKeyID = await req.body.issueKeyID
+  putIssuechangeAddress(dbConfig, issueID, address, issueKeyID)
+})
+
+app.put('/api/issues/:id/changeMilageInIssue', async (req, res)=>{
+  const issueID  = await req.params.id
+  const milage = await req.body.status
+  const issueKeyID = await req.body.issueKeyID
+  putIssuechangeMilage(dbConfig, issueID, milage, issueKeyID)
+})
+
+app.put('/api/issues/:id/changedaysToWorkInIssue', async (req, res)=>{
+  const issueID  = await req.params.id
+  const days = await req.body.status
+  const issueKeyID = await req.body.issueKeyID
+  putIssuechangeDaysToWork(dbConfig, issueID, days, issueKeyID)
+})
+
+app.put('/api/issues/:id/changeInstallersCountInIssue', async (req, res)=>{
+  const issueID  = await req.params.id
+  const installerCount = await req.body.status
+  const issueKeyID = await req.body.issueKeyID
+  putIssueInstallersCount(dbConfig, issueID, installerCount, issueKeyID)
+})
+
+app.put('/api/issues/:id/changeDescription', async (req, res)=>{
+  const issueID  = await req.params.id
+  const description = await req.body.newDescription
+  const issueKeyID = await req.body.issueKeyID
+  putIssueDescription(dbConfig, issueID, description, issueKeyID)
+})
+
+
 
 app.get('/api/users',async (req,res)=>{
   const users = await getUsers(dbConfig)

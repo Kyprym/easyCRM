@@ -4,6 +4,7 @@ import { IssueViewDescription } from "./issueViewChildComponents/issueViewDescri
 import { StatusSelector } from "./issueFunctionalChildCompanents/statusSelector"
 import { ChangeFirmSelector } from "./issueFunctionalChildCompanents/changeFirmSelector"
 import { nanoid } from "nanoid"
+import { ModalEditorWindow } from "./issueViewChildComponents/modalEditorWindow"
 
 
 
@@ -106,6 +107,55 @@ export const IssueView = ({issueID}:{issueID:string})=>{
                         actionType={'ASYNC_CHANGE_CARD_MAKING_STATE'}
                      />
 
+    const cityChangerCompanent:JSX.Element = <ModalEditorWindow
+        issueID={issueID}
+        issueKeyID={issueKeyID}
+        description={'Окно изменения города'}
+        text={city}
+        maxLength={25}
+        link={'changeCityInIssue'}
+        actionType="ASYNC_CHANGE_CITY_STATE"
+    />
+
+    const addressChangerCompanent:JSX.Element = <ModalEditorWindow
+        issueID={issueID}
+        issueKeyID={issueKeyID}
+        description={'Окно изменения адреса'}
+        text={address}
+        maxLength={25}
+        link={'changeAddressInIssue'}
+        actionType="ASYNC_CHANGE_ADDRESS_STATE"
+    />
+
+    const milageToClient:JSX.Element = <ModalEditorWindow
+        issueID={issueID}
+        issueKeyID={issueKeyID}
+        description={'Укажите колличества км до клиента'}
+        text={milage}
+        typeNumber={true}
+        link={'changeMilageInIssue'}
+        actionType="ASYNC_CHANGE_MILAGE_STATE"
+    />
+
+    const daysToWorkCompanent:JSX.Element = <ModalEditorWindow
+        issueID={issueID}
+        issueKeyID={issueKeyID}
+        description={'Укажите колличество дней без ночёвок'}
+        text={daysToWork}
+        typeNumber={true}
+        link={'changedaysToWorkInIssue'}
+        actionType="ASYNC_CHANGE_DAYS_TO_WORK_STATE"
+    />
+
+    const installersCountCompanent:JSX.Element = <ModalEditorWindow
+        issueID={issueID}
+        issueKeyID={issueKeyID}
+        description={'Укажите колличество монтажников'}
+        text={installersCount}
+        typeNumber={true}
+        link={'changeInstallersCountInIssue'}
+        actionType="ASYNC_CHANGE_INSTALLERS_COUNT_STATE"
+    />
 
     const issueInformationArr = [
         {title:'Счёт №', information:`M${String(issueNumber)}`},
@@ -125,11 +175,11 @@ export const IssueView = ({issueID}:{issueID:string})=>{
         ]
 
     const installLocation = [
-        {title:'Город', information:city},
-        {title:'Адрес', information:address},
-        {title:'Км. до клиента', information:milage},
-        {title:'Суток без ночёвок', information:daysToWork},
-        {title:'Колличество монтажников', information:installersCount},
+        {title:'Город', information:cityChangerCompanent},
+        {title:'Адрес', information:addressChangerCompanent},
+        {title:'Км. до клиента', information:milageToClient},
+        {title:'Суток без ночёвок', information:daysToWorkCompanent},
+        {title:'Колличество монтажников', information:installersCountCompanent},
        ]
     
     const preporationData = [
@@ -182,6 +232,7 @@ export const IssueView = ({issueID}:{issueID:string})=>{
             dataArray={preporationData}
         />
         <IssueViewDescription
+            issueID={issueID}
             descriptionText={issueDescription}
         /> 
     </div>)

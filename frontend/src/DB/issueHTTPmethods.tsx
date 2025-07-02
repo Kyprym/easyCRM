@@ -18,7 +18,7 @@ export  const getIssueFromDB = async (URL:string) => {
 
   
 
-export  const putIssueFromDB = async (URL:string, status:number, issueKeyID:string) => {
+export  const putIssueInDB = async (URL:string, status:number | string, issueKeyID:string) => {
     
   const response = await fetch(URL, {
       method: "PUT",
@@ -118,7 +118,29 @@ export  const putIssueFirm= async (issueID:string, issueKeyID:string, newFirmID:
       }else{
         return true
       }
-    }       
+    }     
+    
+export const putIssueDescription = async (issueID:string, issueKeyID:string, newDescription:string, URL:string)=>{
+ const descriptionURL:string = `${URL}/issues/${issueID}/changeDescription`
+ const response = await fetch(descriptionURL, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body:JSON.stringify({
+          issueID:issueID,
+          issueKeyID:issueKeyID,
+          newDescription:newDescription
+        })
+      });
+    
+      if (response.status !== 200) {
+        return false
+      }else{
+        return true
+      }
+
+}
   
     export  const getUsersListFromDB = async (URL:string) => {
     
