@@ -1,9 +1,31 @@
 
+const accessToken:string = localStorage.getItem('accessToken') || ''
+const userID:string = JSON.stringify(localStorage.getItem('id'))
+export const sendAuthDatInDB = async (URL:string, authData:string) => {
+  const response = await fetch(URL, {
+        method:'POST',
+        headers:{
+        'Content-Type': 'application/json',
+        'Authorization': authData
+        },
+  })
+
+  if(response.status !== 200){
+    return false
+  }else{
+    const resJSON = await response.json()
+    return resJSON
+  }
+} 
+
+
+
 
 export  const getIssueFromDB = async (URL:string) => {
   const response = await fetch(URL, {
       method: "GET",
       headers: {
+        'Authorization':accessToken,
         'Content-Type': 'application/json',
       }
     });
@@ -196,7 +218,8 @@ export const createIssueEvent = async (URL:string, eventData:object)=>{
   const resp = await fetch(`${URL}/createIssueEvent`, {
     method:'PUT',
     headers:{
-      'Content-Type':"application/json"
+      'Content-Type':"application/json",
+      'authorization':JSON.stringify(userID)
     },
     body:JSON.stringify(eventData)
   })

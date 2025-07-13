@@ -1,5 +1,4 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
-import { nanoid } from "nanoid"
 import { API_URL } from "../../DB/DBconfig"
 import { useEffect, useState } from "react"
 import { getIssueFromDB } from "../../DB/issueHTTPmethods"

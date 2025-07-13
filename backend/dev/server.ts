@@ -1,18 +1,20 @@
 import express from 'express';
 import bodyParser from 'body-parser'
 import { dbConfig } from './dbConfig';
-import { getASNrelayStatusesTable, getASNStatusesTable, getCardMakingStateTable, getChunckContragent, getContragentID, getEventActionTypes, getEventsStatuses, getFirmsTable, getIssueCalendarEventsTable, getIssueCommentsTable, getIssues, getIssueTable, getIssueWorksStatus, getPayStatusesTable, getProcurementStatusesTable, getProductionStatusTable, getSKIZItatusesTable, getUsers, getUsersLogPassArrFromDB } from './getDataFromDB';
+import { getASNrelayStatusesTable, getASNStatusesTable, getCardMakingStateTable, getChunckContragent, getContragentID, getEventActionTypes, getEventsStatuses, getFirmsTable, getIssueCalendarEventsTable, getIssueCommentsTable, getIssues, getIssueTable, getIssueWorksStatus, getPayStatusesTable, getProcurementStatusesTable, getProductionStatusTable, getSKIZItatusesTable, getUsers, getUsersLogPassArrFromDB, User } from './getDataFromDB';
 import { putContrAgentInIssue, addIssueEvent, putIssueFirm, putIssuePaymentStatus, putIssueProductionStatus, putIssueTheme, putWorkStatus, changeIssueEvent, addNewComment, putIssueASNStatus, putIssueASNSrlaytatus, putIssueSKZIstatus, putIssuechangeProcurementStatus, putIssuechangeCardMakingStatus, putIssuechangeCity, putIssuechangeAddress, putIssuechangeMilage, putIssuechangeDaysToWork, putIssueInstallersCount, putIssueDescription } from './putDataInDB';
-import { correctDate } from './modules/supportFuncs';
+import { correctDate, tockenVerification } from './modules/supportFuncs';
 
 
 const app = express();
-const port = 4000;
+const port:number = 4000;
+const frontServer:string = 'http://localhost:5173'
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:5173'); // Разрешить конкретный источник для разработки
+  res.header('Access-Control-Allow-Origin', frontServer); // Разрешить конкретный источник для разработки
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
@@ -24,20 +26,35 @@ app.get('/api', async (req, res) => {
 });
 
 
+app.post('/api/auth', async (req, res) => {
+  const authToken:string = await String(req.headers['authorization'])
+  const logPassList = await getUsersLogPassArrFromDB(dbConfig)
+  const userID = await tockenVerification(logPassList, authToken)
+  const response:object = {
+    id:userID,
+    accessToken:authToken
+  }
 
+  res.json(response)
+});
+
+/*
 app.post('/api', async (req, res) => {
-
   const result = await getUsersLogPassArrFromDB(dbConfig)
   res.send(result)
 });
-
+*/
 app.get('/api/issues',async (req,res)=>{
   const issues = await getIssues(dbConfig)
   res.json(issues)
 })
 
 
-app.get('/api/issues/:id',async (req,res)=>{
+app.get('/api/issues/:id', async (req,res)=>{
+  const authToken:string = await String(req.headers['authorization'])
+  const logPassList = await getUsersLogPassArrFromDB(dbConfig)
+  const userID = await tockenVerification(logPassList, authToken)
+
   const issueID:string = req.params.id
   const issueTable = await getIssueTable(dbConfig,issueID)
   const issueCalendarEventsTable = await getIssueCalendarEventsTable(dbConfig, issueID)
@@ -230,11 +247,14 @@ app.put('/api/createIssueEvent', async (req, res)=>{
   const mounth:number = today.getMonth() + 1
   const request = await req.body
   const issueID = request.issueID
-
+  const authToken:string =  String(req.headers['authorization'])
+  const logPassList = await getUsersLogPassArrFromDB(dbConfig)
+  const userID = await tockenVerification(logPassList, authToken)
+console.log(userID)// ----------------------------------------------------------------------- передаётся 0 вместо id пользователя
   const eventData = {
     userResponsible:request.responsibleUser,
     eventDataTime: `${today.getFullYear()}-${correctDate(mounth)}-${correctDate(today.getDate())} ${today.getHours()}:${today.getMinutes()}:00`,
-    userCreator:1, // сюда потом передам автора события, после релиза авторизации
+    userCreator:Number(userID), // сюда потом передам автора события, после релиза авторизации
     dateTimeCreate:`${today.getFullYear()}-${correctDate(mounth)}-${correctDate(today.getDate())} ${today.getHours()}:${today.getMinutes()}:00`,
     eventText:request.eventText,
     state: request.state,

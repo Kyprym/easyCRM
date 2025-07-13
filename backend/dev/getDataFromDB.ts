@@ -1,19 +1,27 @@
 import mysql, { Connection, RowDataPacket } from 'mysql2/promise';
 
-export const getUsersLogPassArrFromDB = async (config: mysql.ConnectionOptions): Promise<RowDataPacket[] | false> => {
-    try {
-        const connection: Connection = await mysql.createConnection(config);
-        const [rows]: [RowDataPacket[], object] = await connection.execute('SELECT * FROM users');
-        await connection.end();
-        
-        if (rows.length > 0) {
-            return rows;
-        } else {
-            return false;
-        }
-    } catch (error) {
-        return false;
+export interface User{
+    user_id:number ;
+    user_login: string;
+    user_pass: string;
+    user_email: string;
+}
+
+
+export const getUsersLogPassArrFromDB = async (config: mysql.ConnectionOptions): Promise<User[]> => {
+  try {
+    const connection = await mysql.createConnection(config);
+    const [rows] = await connection.execute<RowDataPacket[]>('SELECT * FROM crmstorage.users');
+    await connection.end();
+
+    if (Array.isArray(rows) && rows.length > 0) {
+      return rows as User[];
     }
+    return [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 export const getIssues = async (config:mysql.ConnectionOptions): Promise<RowDataPacket[] | false > =>{
@@ -297,6 +305,9 @@ export const getCardMakingStateTable = async (config:mysql.ConnectionOptions): P
         return false
     }
 }
+
+
+
 
 
 
