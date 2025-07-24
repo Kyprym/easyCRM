@@ -1,21 +1,21 @@
 import { IssueCalendarEventsList } from "./issueCalendarEventsComponents/issueCalendarEventsList"
 import { IssueCommentsList } from "./issueCommentsComponents/issueCommentsList"
 import { useSelector } from "react-redux"
-import { ChangeFirmSelector } from "./issueFunctionalChildCompanents/changeFirmSelector"
-import { StatusSelector } from "./issueFunctionalChildCompanents/statusSelector"
+import { ChangeFirmSelector } from "./issueFunctionalChildComponents/changeFirmSelector"
+import { StatusSelector } from "./issueFunctionalChildComponents/statusSelector"
 import { Box, Button, Modal } from "@mui/material"
 import { createNewComment } from "../../DB/issueHTTPmethods"
 import { API_URL } from "../../DB/DBconfig"
 import { useState } from "react"
-import { eventModalWindowStyle } from "./issueCalendarEventsComponents/createEventCompanent"
+import { eventModalWindowStyle } from "./issueCalendarEventsComponents/createEventComponent"
 import { today } from "./modules/issueFunctionalFuncs"
 
 const keyFieldsStyle:object = {marginLeft:"1rem",marginTop:'1rem'}
-const informationCompanentsStyles:{backgroundColor:string} = {
+const informationComponentsStyles:{backgroundColor:string} = {
     backgroundColor:'#e3e2e1'
 }
 
-export const IssueInformationCompanent = ({issueID}:{issueID:string})=>{
+export const IssueInformationComponent = ({issueID}:{issueID:string})=>{
     const issueDataFromStore = useSelector((state:any) => state.issue.issue)
     const { issueData, issueEvents, issueComments, firmsList, payStatusesList } = issueDataFromStore;
     const number: number = issueData[0].number
@@ -48,7 +48,7 @@ export const IssueInformationCompanent = ({issueID}:{issueID:string})=>{
             >
 
             <div style={{
-                backgroundColor:informationCompanentsStyles.backgroundColor}}>
+                backgroundColor:informationComponentsStyles.backgroundColor}}>
             <div style={{
                 display:"flex",
                 flexDirection:"column",
@@ -87,14 +87,14 @@ export const IssueInformationCompanent = ({issueID}:{issueID:string})=>{
                     flexDirection:"column",
                 }}
             >
-                <div style={informationCompanentsStyles}>
+                <div style={informationComponentsStyles}>
                     <IssueCalendarEventsList
                         events={calendarEvents}
                         issueID={Number(issueID)}
                     />
                 </div>
 
-                <div style={informationCompanentsStyles}>
+                <div style={informationComponentsStyles}>
 
             <hr></hr>
 
@@ -142,7 +142,7 @@ export const IssueInformationCompanent = ({issueID}:{issueID:string})=>{
                                     variant="contained"
                                     onClick={()=>{
                                         closeCreateCommentWindow()
-                                        createNewComment(API_URL, {issueID:issueID, commentText:newCommentText, today:now, userID:1}) // после выполнения авторизации, необходимо будет изменить userID
+                                        createNewComment(API_URL, {issueID:issueID, commentText:newCommentText, today:now})
                                     }}
                                     >Сохранить
                                 </Button>:

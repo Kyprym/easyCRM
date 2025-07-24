@@ -1,6 +1,6 @@
 import { Box, Button, Modal, Typography } from "@mui/material"
 import { useState } from "react"
-import { eventModalWindowStyle } from "../issueCalendarEventsComponents/createEventCompanent"
+import { eventModalWindowStyle } from "../issueCalendarEventsComponents/createEventComponent"
 import { useDispatch } from "react-redux"
 import { putIssueDescription } from "../../../DB/issueHTTPmethods"
 import { API_URL } from "../../../DB/DBconfig"

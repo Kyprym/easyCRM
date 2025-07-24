@@ -1,7 +1,8 @@
 import { Tab, Tabs} from "@mui/material"
 import { useEffect, useState } from "react";
-import { IssueInformationCompanent } from "./issueInformation";
+import { IssueInformationComponent } from "./issueInformation";
 import { IssueView } from "./issueView";
+import { IssueHistoryComponent } from "./issueHistory/issueHistoryComponent";
 
 
 export const IssuePageContent = ({issueID}:{issueID:string})=>{
@@ -18,12 +19,13 @@ export const IssuePageContent = ({issueID}:{issueID:string})=>{
 
    
 
-    const informationTab:JSX.Element = <IssueInformationCompanent
+    const informationTab:JSX.Element = <IssueInformationComponent
                             issueID={issueID}
                         />
     const issueViewTab:JSX.Element = <IssueView
         issueID={issueID}
     />
+    const issueHistory:JSX.Element = <IssueHistoryComponent/>
 
     return (
         <>
@@ -40,7 +42,7 @@ export const IssuePageContent = ({issueID}:{issueID:string})=>{
         {
         tabsState === 0?informationTab:
         tabsState === 1? issueViewTab: 
-        tabsState === 2? "ВКЛАДКА ИСТОРИИ":
+        tabsState === 2? issueHistory:
         tabsState === 3? "ВКЛАДКА КОММЕНТОВ":<></>
         }
         </div>

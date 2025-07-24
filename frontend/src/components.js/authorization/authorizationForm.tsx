@@ -27,8 +27,10 @@ const URL = `${API_URL}/auth`
 export const AuthorizationFormComponent = ()=>{
     const navigate = useNavigate()
     const [inputsState, setInputsState] = useState<{login:string,pass:string }>({login:"",pass:""})
+    
     const changeLogin = (e:any)=>{
-        setInputsState({login:e.target.value, pass:inputsState.pass})       
+        const value:string = e.target.value.replace(/[^a-zA-Z0-9, @,_,.]/g, '')
+        setInputsState({login: value, pass:inputsState.pass})       
     }
 
     const changePass = (e:any)=>{
@@ -39,16 +41,17 @@ export const AuthorizationFormComponent = ()=>{
         const base64:string = btoa(`${inputsState.login}:${inputsState.pass}`)
         const serverResponse = await sendAuthDatInDB(URL, base64 )
         const userID:number = serverResponse.id
+        const sessionToken:string = serverResponse.sessionToken
         
-        console.log(serverResponse)
-
-        if(userID>0){
+        if(userID > 0 && sessionToken.length > 10){
             localStorage.setItem('id',serverResponse.id)
             localStorage.setItem('accessToken',serverResponse.accessToken)
+            localStorage.setItem('sessionToken', sessionToken)
             navigate('/issues/')
         }else{
             localStorage.setItem('id','0')
             localStorage.setItem('accessToken','')
+            localStorage.setItem('sessionToken','')
             window.location.reload()
         }
     }

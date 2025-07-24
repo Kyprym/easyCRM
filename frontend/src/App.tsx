@@ -5,8 +5,12 @@ import { AuthorizationPage } from './components.js/authorization/authorizationPa
 
 const PrivateRoute = () => {
   const authValid = (): boolean => {
-    const localToken = Number(localStorage.getItem('id'));
-    return localToken > 0;
+    const localUserID:number = Number(localStorage.getItem('id'));
+    const localSessionToken:string = String(localStorage.getItem('sessionToken'));
+ 
+    if(localUserID >0 && localSessionToken.length > 10){
+      return true
+    }else return false
   };
 
   return authValid() ? <Outlet /> : <Navigate to="/" />;
@@ -22,7 +26,7 @@ function App() {
         <Route path="/issues/1" element={<IssuePage issueID="1" />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<AuthorizationPage />} />
     </Routes>
   );
 }

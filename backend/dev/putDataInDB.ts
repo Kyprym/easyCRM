@@ -105,7 +105,7 @@ export const addIssueEvent = async (config:mysql.ConnectionOptions, issueID:stri
 export const changeIssueEvent = async (config:mysql.ConnectionOptions, issueID:string, eventData:any) =>{
     try{
          const connection: Connection = await mysql.createConnection(config)
-         const [rows]:[RowDataPacket[], object] = await connection.execute(`UPDATE crmstorage.issueevents_${issueID} SET eventText = '${eventData.eventText}', responsibleUser = '${eventData.responsibleUser}', datetime_start = '${eventData.dateStart} ${eventData.startTime}:00', datetime_finish = '${eventData.dateFinish} ${eventData.finishTime}:00', status = '${eventData.status}', action_type = '${eventData.actionType}' WHERE (id = '${eventData.eventID}');`)
+         const [rows]:[RowDataPacket[], object] = await connection.execute(`UPDATE crmstorage.issueevents_${issueID} SET userCreater = '${eventData.userCreator}', eventText = '${eventData.eventText}', responsibleUser = '${eventData.responsibleUser}', datetime_start = '${eventData.dateStart} ${eventData.startTime}:00', datetime_finish = '${eventData.dateFinish} ${eventData.finishTime}:00', status = '${eventData.status}', action_type = '${eventData.actionType}' WHERE (id = '${eventData.eventID}');`)
          await connection.end()
          if(rows.length >0){
              return rows;
@@ -118,10 +118,10 @@ export const changeIssueEvent = async (config:mysql.ConnectionOptions, issueID:s
      }
  }
 
- export const addNewComment = async (config:mysql.ConnectionOptions, commentData:any) =>{
+ export const addNewComment = async (config:mysql.ConnectionOptions, issueID:string | number, commentData:any) =>{
     try {
         const connection: Connection = await mysql.createConnection(config)
-        const [rows]:[RowDataPacket[], object] = await connection.execute(`INSERT INTO crmstorage.issuecomments_1 (user, createDate, text) VALUES ('${commentData.userID}', '${commentData.today}', '${commentData.commentText}');`)
+        const [rows]:[RowDataPacket[], object] = await connection.execute(`INSERT INTO crmstorage.issuecomments_${issueID} (user, createDate, text) VALUES ('${commentData.userID}', '${commentData.today}', '${commentData.commentText}');`)
         await connection.end()
         if(rows.length >0){
             return rows;
@@ -325,3 +325,19 @@ export const putIssueDescription= async (config:mysql.ConnectionOptions, issueID
         return false
     }
 }
+
+ export const addIssueHistoryEvent = async (config:mysql.ConnectionOptions, issueID:number | string, actionType:number, eventTime:string, userID:number) =>{
+    try {
+        const connection: Connection = await mysql.createConnection(config)
+        const [rows]:[RowDataPacket[], object] = await connection.execute(`INSERT INTO crmstorage.issuehistory_${issueID} (action_type, create_time, user_creater_id) VALUES ('${actionType}', '${eventTime}', '${userID}');`)
+        await connection.end()
+        if(rows.length >0){
+            return rows;
+        }else{
+            return false
+        }
+    } catch (error) {
+        console.log(error)
+         return false
+    }
+ }

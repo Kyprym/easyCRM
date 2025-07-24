@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
 import { ViewInformationBox } from "./issueViewChildComponents/viewInformationBox"
 import { IssueViewDescription } from "./issueViewChildComponents/issueViewDescription"
-import { StatusSelector } from "./issueFunctionalChildCompanents/statusSelector"
-import { ChangeFirmSelector } from "./issueFunctionalChildCompanents/changeFirmSelector"
+import { StatusSelector } from "./issueFunctionalChildComponents/statusSelector"
+import { ChangeFirmSelector } from "./issueFunctionalChildComponents/changeFirmSelector"
 import { nanoid } from "nanoid"
 import { ModalEditorWindow } from "./issueViewChildComponents/modalEditorWindow"
 
@@ -107,7 +107,7 @@ export const IssueView = ({issueID}:{issueID:string})=>{
                         actionType={'ASYNC_CHANGE_CARD_MAKING_STATE'}
                      />
 
-    const cityChangerCompanent:JSX.Element = <ModalEditorWindow
+    const cityChangerComponent:JSX.Element = <ModalEditorWindow
         issueID={issueID}
         issueKeyID={issueKeyID}
         description={'Окно изменения города'}
@@ -117,7 +117,7 @@ export const IssueView = ({issueID}:{issueID:string})=>{
         actionType="ASYNC_CHANGE_CITY_STATE"
     />
 
-    const addressChangerCompanent:JSX.Element = <ModalEditorWindow
+    const addressChangerComponent:JSX.Element = <ModalEditorWindow
         issueID={issueID}
         issueKeyID={issueKeyID}
         description={'Окно изменения адреса'}
@@ -137,7 +137,7 @@ export const IssueView = ({issueID}:{issueID:string})=>{
         actionType="ASYNC_CHANGE_MILAGE_STATE"
     />
 
-    const daysToWorkCompanent:JSX.Element = <ModalEditorWindow
+    const daysToWorkComponent:JSX.Element = <ModalEditorWindow
         issueID={issueID}
         issueKeyID={issueKeyID}
         description={'Укажите колличество дней без ночёвок'}
@@ -147,7 +147,7 @@ export const IssueView = ({issueID}:{issueID:string})=>{
         actionType="ASYNC_CHANGE_DAYS_TO_WORK_STATE"
     />
 
-    const installersCountCompanent:JSX.Element = <ModalEditorWindow
+    const installersCountComponent:JSX.Element = <ModalEditorWindow
         issueID={issueID}
         issueKeyID={issueKeyID}
         description={'Укажите колличество монтажников'}
@@ -175,11 +175,11 @@ export const IssueView = ({issueID}:{issueID:string})=>{
         ]
 
     const installLocation = [
-        {title:'Город', information:cityChangerCompanent},
-        {title:'Адрес', information:addressChangerCompanent},
+        {title:'Город', information:cityChangerComponent},
+        {title:'Адрес', information:addressChangerComponent},
         {title:'Км. до клиента', information:milageToClient},
-        {title:'Суток без ночёвок', information:daysToWorkCompanent},
-        {title:'Колличество монтажников', information:installersCountCompanent},
+        {title:'Суток без ночёвок', information:daysToWorkComponent},
+        {title:'Колличество монтажников', information:installersCountComponent},
        ]
     
     const preporationData = [

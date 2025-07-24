@@ -85,6 +85,20 @@ export const getIssueCommentsTable = async (config:mysql.ConnectionOptions, issu
     }
 }
 
+export const getIssueHistoryTable = async (config:mysql.ConnectionOptions, issueID:string): Promise<RowDataPacket[] | false > =>{
+    try{
+        const connection: Connection = await mysql.createConnection(config)
+        const [rows]:[RowDataPacket[], object] = await connection.execute(`SELECT * FROM issuehistory_${issueID} ORDER BY n_in_queue DESC`)
+        await connection.end()
+        if(rows.length >=0){
+            return rows;
+        }else{
+            return false
+        }
+    }catch(error){
+        return false
+    }
+}
 
 export const getProductionStatusTable = async (config:mysql.ConnectionOptions): Promise<RowDataPacket[] | false > =>{
     try{
@@ -305,6 +319,24 @@ export const getCardMakingStateTable = async (config:mysql.ConnectionOptions): P
         return false
     }
 }
+
+export const getIssueHistoryStatuses = async (config:mysql.ConnectionOptions): Promise<RowDataPacket[] | false > =>{
+    try{
+        const connection: Connection = await mysql.createConnection(config)
+        const [rows]:[RowDataPacket[], object] = await connection.execute("SELECT * FROM crmstorage.history_actyon_type_statuses")
+        
+        await connection.end()
+        if(rows.length >=0){
+            return rows;
+        }else{
+            return false
+        }
+    }catch(error){
+        return false
+    }
+}
+
+
 
 
 

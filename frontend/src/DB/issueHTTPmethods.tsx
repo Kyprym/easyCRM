@@ -1,6 +1,9 @@
 
 const accessToken:string = localStorage.getItem('accessToken') || ''
-const userID:string = JSON.stringify(localStorage.getItem('id'))
+const userID:string = JSON.stringify(Number(localStorage.getItem('id')))
+const sessionToken:string = JSON.stringify(localStorage.getItem('sessionToken'))
+
+
 export const sendAuthDatInDB = async (URL:string, authData:string) => {
   const response = await fetch(URL, {
         method:'POST',
@@ -45,11 +48,12 @@ export  const putIssueInDB = async (URL:string, status:number | string, issueKey
   const response = await fetch(URL, {
       method: "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization":sessionToken,
       },
       body:JSON.stringify({
         status:status,
-        issueKeyID:issueKeyID
+        issueKeyID:issueKeyID,
       })
     });
   
@@ -68,6 +72,7 @@ export  const getFoundContragentsFromDB = async (searchInputText:string, URL:str
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
+
       },
       body:JSON.stringify({chunkContragentName:searchInputText})
     });
@@ -85,6 +90,7 @@ export  const putContragentInIssue = async (issueID:string, contragentID:number,
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
+        'Authorization':sessionToken
       },
       body:JSON.stringify({
         issueID:issueID,
@@ -106,6 +112,7 @@ export  const putIssueTheme = async (issueID:string, issueKeyID:string, newTheme
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',
+          'Authorization':sessionToken
         },
         body:JSON.stringify({
           issueID:issueID,
@@ -127,6 +134,7 @@ export  const putIssueFirm= async (issueID:string, issueKeyID:string, newFirmID:
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',
+          'Authorization':sessionToken
         },
         body:JSON.stringify({
           issueID:issueID,
@@ -148,6 +156,7 @@ export const putIssueDescription = async (issueID:string, issueKeyID:string, new
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',
+          'Authorization':sessionToken
         },
         body:JSON.stringify({
           issueID:issueID,
@@ -219,13 +228,13 @@ export const createIssueEvent = async (URL:string, eventData:object)=>{
     method:'PUT',
     headers:{
       'Content-Type':"application/json",
-      'authorization':JSON.stringify(userID)
+      'authorization':sessionToken
     },
     body:JSON.stringify(eventData)
   })
 
   if(resp.status !==200){
-      return false
+    return false
   }else{
     const resJSON = await resp.json()
     return resJSON
@@ -236,7 +245,8 @@ export const updateIssueEvent = async (URL:string, eventData:object)=>{
   const resp = await fetch(`${URL}/updateIssueEvent`, {
     method:'PUT',
     headers:{
-      'Content-Type':"application/json"
+      'Content-Type':"application/json",
+      'Authorization':sessionToken
     },
     body:JSON.stringify(eventData)
   })
@@ -252,7 +262,8 @@ export const createNewComment = async (URL:String, commentData:object)=> {
   const resp = await fetch(`${URL}/createCommentInIssue`,{
     method:"PUT",
     headers:{
-      'Content-Type':"application/json"
+      'Content-Type':"application/json",
+      'Authorization':sessionToken,
     },
     body:JSON.stringify(commentData)
   })

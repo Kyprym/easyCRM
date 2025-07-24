@@ -32,6 +32,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -45,18 +47,20 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                                 issueData:[{
                                         ...state.issue.issueData[0], firm:action.payload
                                   }],
-                                  issueEvents:state.issue.issueEvents,
-                                  issueComments:state.issue.issueComments,
-                                  productionStatuses:state.issue.productionStatuses,
-                                  workStatus:state.issue.workStatus,
-                                  firmsList:state.issue.firmsList,
-                                  payStatusesList:state.issue.payStatusesList,
-                                  users:state.issue.users,
-                                  ASNStatuses:state.issue.ASNStatuses,
-                                  ASNrelayStatuses:state.issue.ASNrelayStatuses,
-                                  SKZIstatuses:state.issue.SKZIstatuses,
-                                  procurementStatuses:state.issue.procurementStatuses,
-                                  cardMakingStatuses:state.issue.cardMakingStatuses,
+                                        issueEvents:state.issue.issueEvents,
+                                        issueComments:state.issue.issueComments,
+                                        productionStatuses:state.issue.productionStatuses,
+                                        workStatus:state.issue.workStatus,
+                                        firmsList:state.issue.firmsList,
+                                        payStatusesList:state.issue.payStatusesList,
+                                        users:state.issue.users,
+                                        ASNStatuses:state.issue.ASNStatuses,
+                                        ASNrelayStatuses:state.issue.ASNrelayStatuses,
+                                        SKZIstatuses:state.issue.SKZIstatuses,
+                                        procurementStatuses:state.issue.procurementStatuses,
+                                        cardMakingStatuses:state.issue.cardMakingStatuses,
+                                        issueHistory:state.issue.issueHistory,
+                                        histoRyStatuses:state.issue.histoRyStatuses
                         }
                     }
                 } catch (error) {
@@ -82,6 +86,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -107,6 +113,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -157,6 +165,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -182,6 +192,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -207,6 +219,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -232,6 +246,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -257,6 +273,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -282,6 +300,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -332,6 +352,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {
@@ -357,6 +379,8 @@ export const issueReducer = (state = defaultState, action:Action)=>{
                         SKZIstatuses:state.issue.SKZIstatuses,
                         procurementStatuses:state.issue.procurementStatuses,
                         cardMakingStatuses:state.issue.cardMakingStatuses,
+                        issueHistory:state.issue.issueHistory,
+                        histoRyStatuses:state.issue.histoRyStatuses
                     }
                 }
             } catch (error) {

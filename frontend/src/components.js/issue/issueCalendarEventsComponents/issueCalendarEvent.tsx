@@ -2,7 +2,7 @@ import { Box,  Stack } from "@mui/material"
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { getLowText } from "../modules/issueFunctionalFuncs";
 import { useState } from "react";
-import { ChangeEventCalendarCompanent } from "./changeCalendarEventCompanent";
+import { ChangeEventCalendarComponent } from "./changeCalendarEventComponent";
 interface issueCalendarEventProps{
           issueID:number,
           eventID:number,
@@ -38,7 +38,7 @@ export const IssueCalendarEvent = ({ issueID, eventID, eventdateStart, eventdate
             
                 {
                     changeEventWindowState?
-                     <ChangeEventCalendarCompanent
+                     <ChangeEventCalendarComponent
                      issueID={issueID}
                      eventID={eventID}
                      />:

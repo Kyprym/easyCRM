@@ -1,4 +1,4 @@
-const companentStyle = {
+const componentStyle = {
     display:"flex",
     justifyContent:"center",
     alignItems:"center",
@@ -7,7 +7,7 @@ const companentStyle = {
 }
 
 export const MissingNoteComponet= ({noteText}:{noteText:string})=>{
-return (<h1 style={companentStyle}>
+return (<h1 style={componentStyle}>
     {noteText}
 </h1>)
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getLowList } from "../modules/issueFunctionalFuncs";
 import { Button } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
-import { CreateEventCompanent } from "./createEventCompanent";
+import { CreateEventComponent } from "./createEventComponent";
 import { nanoid } from "nanoid";
 import { MissingNoteComponet } from "./missingNoteComponent";
 
@@ -54,7 +54,7 @@ export const IssueCalendarEventsList = ({ events, issueID }: eventsListProps) =>
           
     
           <span  style={{marginLeft:"1rem"}}>
-              <CreateEventCompanent
+              <CreateEventComponent
               issueID={issueID}/>
           </span>
       </span>

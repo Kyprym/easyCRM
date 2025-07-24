@@ -22,15 +22,15 @@ export const getLowName = (userName:string):string =>{
     return lowName
 }
 
-export const getLowList = (companentsList:object[], length:number)=>{
-    if(companentsList.length > length){
-        const LowCompanentsList:object[] = []
+export const getLowList = (componentsList:object[], length:number)=>{
+    if(componentsList.length > length){
+        const LowComponentsList:object[] = []
         for(let i=0; i<length; i++){
-            LowCompanentsList.push(companentsList[i])
+            LowComponentsList.push(componentsList[i])
         } 
-        return LowCompanentsList
+        return LowComponentsList
     }else{
-        return companentsList
+        return componentsList
     }
     
 }

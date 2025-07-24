@@ -1,7 +1,7 @@
 import { Box, Stack, ThemeProvider } from "@mui/material"
-import { StatusSelector } from "./issueFunctionalChildCompanents/statusSelector"
-import { ChangeContragentCompanent } from "./issueFunctionalChildCompanents/changeContragentCompanent"
-import { ChangeThemeCompanent } from "./issueFunctionalChildCompanents/changeThemeCompanent"
+import { StatusSelector } from "./issueFunctionalChildComponents/statusSelector"
+import { ChangeContragentComponent } from "./issueFunctionalChildComponents/changeContragentComponent"
+import { ChangeThemeComponent } from "./issueFunctionalChildComponents/changeThemeComponent"
 import { useSelector } from "react-redux"
 
 interface issueHeaderProps {
@@ -48,7 +48,7 @@ export const IssueHeader = ({issueID}:issueHeaderProps)=>{
         </div>
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
 
-        <ChangeThemeCompanent
+        <ChangeThemeComponent
           issueID={issueID}
         />
 
@@ -70,7 +70,7 @@ export const IssueHeader = ({issueID}:issueHeaderProps)=>{
             /> 
            
             <div> 
-                <ChangeContragentCompanent
+                <ChangeContragentComponent
                   issueID={issueID}
                   contragent={contragent}
                 />

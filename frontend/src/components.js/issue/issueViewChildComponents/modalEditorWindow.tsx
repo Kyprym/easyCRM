@@ -1,6 +1,6 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { useState } from "react";
-import { eventModalWindowStyle } from "../issueCalendarEventsComponents/createEventCompanent";
+import { eventModalWindowStyle } from "../issueCalendarEventsComponents/createEventComponent";
 import { putIssueInDB } from "../../../DB/issueHTTPmethods";
 import { API_URL } from "../../../DB/DBconfig";
 import { useDispatch } from "react-redux";
@@ -92,7 +92,7 @@ export const ModalEditorWindow = ({issueID, issueKeyID, description, text, maxLe
             >
             </textarea>
 
-    const modalWindowCompanent:JSX.Element = <Modal
+    const modalWindowComponent:JSX.Element = <Modal
         open={modalWindowState}
         onClose={closeModalWindow}
         aria-labelledby="modal-modal-title"
@@ -132,7 +132,7 @@ export const ModalEditorWindow = ({issueID, issueKeyID, description, text, maxLe
         <span style={{
             cursor:"pointer"
             }}> 
-            {!modalWindowState? defaultTextState: modalWindowCompanent}
+            {!modalWindowState? defaultTextState: modalWindowComponent}
             
         </span>
     </>)
