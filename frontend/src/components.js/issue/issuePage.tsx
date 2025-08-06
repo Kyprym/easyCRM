@@ -5,8 +5,8 @@ import { CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
-interface issueProps {
-  issueID: string
+export interface issueProps {
+  issueID: number
 }
 
 export const IssuePage = ({ issueID }: issueProps) => {

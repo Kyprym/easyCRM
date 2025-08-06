@@ -25,19 +25,16 @@ const style = {
     }
 
 
-export const ChangeThemeComponent = ({issueID}:{issueID:string | string}) => {
+export const ChangeThemeComponent = ({issueID}:{issueID:number}) => {
 
     const issueData = useSelector((state:object[]) => state.issue.issue.issueData[0])
     const issueKeyID = issueData.id
     const textTheme = issueData.theme
 
-
-
-   const [changeThemeState, setChangeThemeState] = useState<boolean>(false)
-   const [themeTextFontColorState, setFontTextColorState] = useState<string>('black')
-   const [themeChangeTextState, setThemeChangeTextState] = useState<string>(textTheme)
-   const [issueTextState, setIssueState] = useState<string>(textTheme)
-
+    const [changeThemeState, setChangeThemeState] = useState<boolean>(false)
+    const [themeTextFontColorState, setFontTextColorState] = useState<string>('black')
+    const [themeChangeTextState, setThemeChangeTextState] = useState<string>(textTheme)
+    const [issueTextState, setIssueState] = useState<string>(textTheme)
 
     const showModal = () => setChangeThemeState(true)
     const closeModal = () => setChangeThemeState(false)

@@ -84,7 +84,7 @@ export  const getFoundContragentsFromDB = async (searchInputText:string, URL:str
       return resJSON.contragentsArr
     }
   }
-export  const putContragentInIssue = async (issueID:string, contragentID:number, URL:string) => {
+export  const putContragentInIssue = async (issueID:number, contragentID:number, URL:string) => {
   const contragentsURL:string = `${URL}/issues/${issueID}/putContragentInIssue`
   const response = await fetch(contragentsURL, {
       method: "PUT",
@@ -106,7 +106,7 @@ export  const putContragentInIssue = async (issueID:string, contragentID:number,
     }
       
 
-export  const putIssueTheme = async (issueID:string, issueKeyID:string, newThemeText:string, URL:string) => {
+export  const putIssueTheme = async (issueID:number, issueKeyID:string, newThemeText:string, URL:string) => {
   const contragentsURL:string = `${URL}/issues/${issueID}/putIssueTheme`
     const response = await fetch(contragentsURL, {
         method: "PUT",
@@ -128,7 +128,7 @@ export  const putIssueTheme = async (issueID:string, issueKeyID:string, newTheme
           }
         }
 
-export  const putIssueFirm= async (issueID:string, issueKeyID:string, newFirmID:number, URL:string) => {
+export  const putIssueFirm= async (issueID:number, issueKeyID:string, newFirmID:number, URL:string) => {
   const contragentsURL:string = `${URL}/issues/${issueID}/putIssueFirm`
     const response = await fetch(contragentsURL, {
         method: "PUT",
@@ -150,7 +150,7 @@ export  const putIssueFirm= async (issueID:string, issueKeyID:string, newFirmID:
       }
     }     
     
-export const putIssueDescription = async (issueID:string, issueKeyID:string, newDescription:string, URL:string)=>{
+export const putIssueDescription = async (issueID:number, issueKeyID:string, newDescription:string, URL:string)=>{
  const descriptionURL:string = `${URL}/issues/${issueID}/changeDescription`
  const response = await fetch(descriptionURL, {
         method: "PUT",
@@ -274,4 +274,20 @@ export const createNewComment = async (URL:String, commentData:object)=> {
       return resJSON
     }
 }
-    
+  
+export  const getIssueHistoryFromDB = async (URL:string, issueID:number) => {
+  const response = await fetch(`${URL}/issues/${issueID}/issueHistory`, {
+      method: "GET",
+      headers: {
+        'Authorization':sessionToken,
+        'Content-Type': 'application/json',
+      }
+    });
+  
+    if (response.status !== 200) {
+      return false
+    }else{
+      const resJSON = await response.json()
+      return resJSON
+    }
+  }

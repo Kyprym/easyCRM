@@ -9,16 +9,19 @@ import { API_URL } from "../../DB/DBconfig"
 import { useState } from "react"
 import { eventModalWindowStyle } from "./issueCalendarEventsComponents/createEventComponent"
 import { today } from "./modules/issueFunctionalFuncs"
+import { issueProps } from "./issuePage"
+import { globalBackgroundTheme } from "../../App"
 
 const keyFieldsStyle:object = {marginLeft:"1rem",marginTop:'1rem'}
-const informationComponentsStyles:{backgroundColor:string} = {
-    backgroundColor:'#e3e2e1'
-}
 
-export const IssueInformationComponent = ({issueID}:{issueID:string})=>{
+
+export const IssueInformationComponent = ({ issueID }: issueProps)=>{
+    const informationComponentsStyles:{backgroundColor:string} = {
+    backgroundColor:globalBackgroundTheme
+}
     const issueDataFromStore = useSelector((state:any) => state.issue.issue)
     const { issueData, issueEvents, issueComments, firmsList, payStatusesList } = issueDataFromStore;
-    const number: number = issueData[0].number
+    
     const issueKeyID:string = issueData[0].id
     const firm:number = issueData[0].firm
     const paymentStatus:number = issueData[0].paymentStatus
@@ -27,7 +30,7 @@ export const IssueInformationComponent = ({issueID}:{issueID:string})=>{
     const [newCommentWindowState, setNewCommentWindowState] = useState<boolean>(false)
     const [newCommentText, setNewCommentText] = useState<string>('')
     const [saveCommentButtonState, setSaveCommentButtonState] = useState<boolean>(false)
-    const now = `${today.date} ${today.time}`
+    const now:string = `${today.date} ${today.time}`
 
 
     const closeCreateCommentWindow = ():void=>{
@@ -55,7 +58,7 @@ export const IssueInformationComponent = ({issueID}:{issueID:string})=>{
                 fontSize:'1.2rem'
             }}>
                 <div style={{margin:"1rem", fontSize:"1.5rem"}}>Ключевые поля</div>
-                <div style={keyFieldsStyle}> <span style={{fontWeight:"bold"}}>Счет №</span> {number}</div>
+                <div style={keyFieldsStyle}> <span style={{fontWeight:"bold"}}>Счет №</span> M{issueID}</div>
 
                 <div style={keyFieldsStyle}>
                     <span style={{fontWeight:"bold"}}>Фирма</span> 
@@ -72,7 +75,7 @@ export const IssueInformationComponent = ({issueID}:{issueID:string})=>{
                         selectorName={"Статус оплаты"}
                         issueID={issueID}
                         issueKeyID={issueKeyID}
-                        status={paymentStatus}
+                        status={paymentStatus} 
                         statusTextArr={payStatusesList}
                         link={'changeIssuePayStatus'}
                         actionType={'ASYNC_CHANGE_PAY_STATUS'}

@@ -22,6 +22,12 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import HailIcon from '@mui/icons-material/Hail';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import { getIssueHistoryFromDB } from "../../../DB/issueHTTPmethods";
+import { API_URL } from "../../../DB/DBconfig";
+import { useDispatch } from "react-redux";
+import { issueProps } from "../issuePage";
+import { useEffect } from "react";
+import { globalBackgroundTheme } from "../../../App";
 
 const iconStyle = {
     paddingTop:"1rem",
@@ -74,19 +80,35 @@ const historyIconArr = [
     changeCartStateIcon
 ]
 
-export const IssueHistoryComponent = ():JSX.Element =>{
-    
+export const IssueHistoryComponent = ({ issueID }: issueProps):JSX.Element =>{
+    const dispatch = useDispatch()
     const state = useSelector((state:any)=>state.issue.issue )
+
+    const changeHistory = async ()=>{
+        const hitoryListState:[] = await getIssueHistoryFromDB(API_URL, issueID)
+        dispatch({type:'ASYNC_CHANGE_HISTORY', payload:hitoryListState})
+    }
+
     const historyStatusesTable:[] = state.histoRyStatuses
-    const historyList:[] = state.issueHistory
+    let historyList:[] = state.issueHistory
     const userList:[] = state.users
 
+
+    useEffect(()=>{
+        changeHistory()
+    }, [historyList.length])
+
+
     return (<>
-            <div>
+            <div style={{
+                    backgroundColor:globalBackgroundTheme,
+                    paddingTop:"0.1rem",
+                    width:"90%"
+                    }}>
                 {historyList.map((history:historyData) =>{
                     const actionType:number = Number(history.action_type)
                     const user:number = Number(history.user_creater_id)
-                    return <span key={nanoid()}>
+                    return <span key={`historyID${history.n_in_queue}`}>
                         <IssueHistoryChildComponent
                             create_time={history.create_time}
                             action_type={historyStatusesTable[actionType - 1].actyon_type_text}

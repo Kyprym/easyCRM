@@ -1,6 +1,6 @@
 import { IssueDescriptionChangeWindow } from "./IssueDescriptionChangeWindow"
 
-export const IssueViewDescription = ({descriptionText, issueID}:{descriptionText:string, issueID:string}) =>{
+export const IssueViewDescription = ({descriptionText, issueID}:{descriptionText:string, issueID:number}) =>{
     
     return (<>
         <div style={{

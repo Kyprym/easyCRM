@@ -9,7 +9,7 @@ import { useSelector } from "react-redux"
 
 
 
-export const IssueDescriptionChangeWindow = ({descriptionText, issueID}:{descriptionText:string, issueID:string}) =>{
+export const IssueDescriptionChangeWindow = ({descriptionText, issueID}:{descriptionText:string, issueID:number}) =>{
     const [changeDescriptionButtonState, setChangeDewscriptionButtonState] = useState<boolean>(false)
     const [descriptionTextState, setDescriptionState] = useState<string>(descriptionText)
     const dispatch = useDispatch()

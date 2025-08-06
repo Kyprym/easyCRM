@@ -6,7 +6,7 @@ import { API_URL } from "../../../DB/DBconfig";
 import { useDispatch } from "react-redux";
 
 interface modalEditorWindowProps {
-  issueID:string;
+  issueID:number;
   issueKeyID:string;
   description?:string;
   text:string | number;

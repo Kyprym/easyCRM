@@ -57,3 +57,6 @@ export const changeInstallerCountValueAction = (state:number):ActionInterface =>
 export const changeDescriptionTextAction = (state:string):ActionInterface =>{
     return {type:'CHANGE_ISSUE_DESCRIPTION', payload:state}
 }
+export const changeHistoryAction = (state:[]):{type:string, payload:[]} =>{
+    return {type:'CHANGE_HISTORY', payload:state}
+}

@@ -1,8 +1,8 @@
 import { FormControl, InputLabel, NativeSelect } from "@mui/material";
 import { useState } from "react";
-import { putIssueInDB } from "../../../DB/issueHTTPmethods";
 import { API_URL } from "../../../DB/DBconfig";
 import { useDispatch } from "react-redux";
+import { putIssueInDB } from "../../../DB/issueHTTPmethods";
 
 interface StatusItem {
   status: string;
@@ -12,7 +12,7 @@ interface StatusItem {
 
 interface statusSelectorProps {
   selectorName?:string;
-  issueID:string;
+  issueID:number;
   issueKeyID:string;
   status: number;
   statusTextArr?: StatusItem[];
@@ -26,12 +26,13 @@ export const StatusSelector = ({selectorName, issueID, issueKeyID, status, statu
   const [backgrColorState, setBackgrColorState] = useState(initialColor)
 
   
-  const changeStatusSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {   
+  const changeStatusSelector = async (e: React.ChangeEvent<HTMLSelectElement>) => {   
     const selectedValue:number = Number(e.target.value)
     const selectedColor:string = statusTextArr[selectedValue].color 
     setBackgrColorState(selectedColor)
     putIssueInDB(`${API_URL}/issues/${issueID}/${link}`, selectedValue + 1, issueKeyID)
     actionType? dispatch({type:actionType, payload:selectedValue + 1}): null
+
   };
 
   return (

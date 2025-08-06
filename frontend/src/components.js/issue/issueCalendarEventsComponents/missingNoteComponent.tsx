@@ -6,7 +6,7 @@ const componentStyle = {
     
 }
 
-export const MissingNoteComponet= ({noteText}:{noteText:string})=>{
+export const MissingNoteComponet = ({noteText}:{noteText:string})=>{
 return (<h1 style={componentStyle}>
     {noteText}
 </h1>)

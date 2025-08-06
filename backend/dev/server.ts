@@ -119,9 +119,14 @@ app.put('/api/issues/:id/productionStatus',async (req,res)=>{
 
 app.put('/api/issues/:id/workStatus',async (req,res)=>{
   const issueID  = await req.params.id
+  const sessionToken:string = await String(req.headers['authorization'])
+  const UsersTokenList= await DBtokensList
+  const userID =  await sessionTockenVerification(UsersTokenList, sessionToken)
   const newSWorkStatus = await req.body.status
   const issueKeyID = await req.body.issueKeyID
+
   putWorkStatus(dbConfig, issueID, newSWorkStatus, issueKeyID)
+  addIssueHistoryEvent(dbConfig, issueID, 6, dateTimeCreate, userID)
 })
 
 app.put('/api/issues/:id/putContragentInIssue',async (req,res)=>{
@@ -369,8 +374,20 @@ app.put('/api/createCommentInIssue', async(req, res)=>{
   }
   const issueID = commentData.issueID
   addNewComment(dbConfig, issueID, commentData)
-  
   addIssueHistoryEvent(dbConfig, issueID, 4, dateTimeCreate, userID )
+})
+
+app.get('/api/issues/:id/issueHistory' , async(req, res)=>{
+  const issueID  = await req.params.id
+  const sessionToken:string = await String(req.headers['authorization'])
+  const UsersTokenList= await DBtokensList
+  const userID =  await sessionTockenVerification(UsersTokenList, sessionToken)
+  if(userID >0){
+    const issueHistory = await getIssueHistoryTable(dbConfig, issueID)
+    res.json(issueHistory)
+  }else{
+    res.status(403)
+  }
 })
 
 app.listen(port, () => {

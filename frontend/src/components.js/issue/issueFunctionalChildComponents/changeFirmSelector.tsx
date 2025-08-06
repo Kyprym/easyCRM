@@ -6,7 +6,7 @@ import { API_URL } from "../../../DB/DBconfig";
 import { useDispatch } from "react-redux";
 
 interface changeFirmProps{
-    issueID:string;
+    issueID:number;
     issueKeyID:string;
     firm:number;
     firmsList:object[];

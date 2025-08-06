@@ -359,7 +359,7 @@ export const issueReducer = (state = defaultState, action:Action)=>{
             } catch (error) {
              return state
             } 
-         case "CHANGE_ISSUE_DESCRIPTION":
+        case "CHANGE_ISSUE_DESCRIPTION":
             try {
                 return {
                     ...state,
@@ -386,6 +386,32 @@ export const issueReducer = (state = defaultState, action:Action)=>{
             } catch (error) {
              return state
             } 
+        case "CHANGE_HISTORY":
+                    try {
+                        return {
+                            ...state,
+                            issue:{
+                                issueData:state.issue.issueData,
+                                issueEvents:state.issue.issueEvents,
+                                issueComments:state.issue.issueComments,
+                                productionStatuses:state.issue.productionStatuses,
+                                workStatus:state.issue.workStatus,
+                                firmsList:state.issue.firmsList,
+                                payStatusesList:state.issue.payStatusesList,
+                                users:state.issue.users,
+                                ASNStatuses:state.issue.ASNStatuses,
+                                ASNrelayStatuses:state.issue.ASNrelayStatuses,
+                                SKZIstatuses:state.issue.SKZIstatuses,
+                                procurementStatuses:state.issue.procurementStatuses,
+                                cardMakingStatuses:state.issue.cardMakingStatuses,
+                                histoRyStatuses:state.issue.histoRyStatuses,
+                                issueHistory:action.payload
+                            }
+                        }
+                    } catch (error) {
+                     return state
+                    } 
+            
         default:
             return state;
     }

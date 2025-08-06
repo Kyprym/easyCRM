@@ -3,9 +3,10 @@ import { StatusSelector } from "./issueFunctionalChildComponents/statusSelector"
 import { ChangeContragentComponent } from "./issueFunctionalChildComponents/changeContragentComponent"
 import { ChangeThemeComponent } from "./issueFunctionalChildComponents/changeThemeComponent"
 import { useSelector } from "react-redux"
+import { globalBackgroundTheme } from "../../App"
 
 interface issueHeaderProps {
-    issueID:string,
+    issueID:number,
     theme:string,
 }
 
@@ -18,7 +19,7 @@ export const IssueHeader = ({issueID}:issueHeaderProps)=>{
     const contragent = issueData[0].contragent
 
     return (
-        <div style={{padding:"2rem 2rem 1rem 2rem", backgroundColor:"#e3e2e1"}}>
+        <div style={{padding:"2rem 2rem 1rem 2rem", backgroundColor:globalBackgroundTheme}}>
                 <Stack 
             direction='row'
             spacing={2}

@@ -10,11 +10,10 @@ import { ModalEditorWindow } from "./issueViewChildComponents/modalEditorWindow"
 
 
 
-export const IssueView = ({issueID}:{issueID:string})=>{
+export const IssueView = ({issueID}:{issueID:number})=>{
     const issue:object = useSelector(state=>state.issue.issue)
     const issueKeyID:string = issue.issueData[0].id
     const firmList:object[] = issue.firmsList
-    const issueNumber:string = issue.issueData[0].number
     const craeteDate:string = issue.issueData[0].craeteDate
     const manager:string = issue.issueData[0].manager
     const firm:number = Number(issue.issueData[0].firm)
@@ -158,7 +157,7 @@ export const IssueView = ({issueID}:{issueID:string})=>{
     />
 
     const issueInformationArr = [
-        {title:'Счёт №', information:`M${String(issueNumber)}`},
+        {title:'Счёт №', information:`M${issueID}`},
         {title:'Дата  создания', information:craeteDate},
         {title:'Ответственный', information:issue.users[manager].user_login},
         {

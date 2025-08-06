@@ -7,7 +7,7 @@ import { API_URL } from '../../../DB/DBconfig';
 import { nanoid } from 'nanoid';
 
 interface changeContragentProps{
-    issueID:string,
+    issueID:number,
     contragent:string
 }
 

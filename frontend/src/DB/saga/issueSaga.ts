@@ -1,5 +1,5 @@
 import {all, call, fork, put, takeEvery} from 'redux-saga/effects'
-import { changeAddressTextAction, changeASNrelayStateAction, changeASNstatusAction, changeCardMakingStatusAction, changeCityStateAction, changeDayToWorkValueAction, changeDescriptionTextAction, changeFirmStateAction, changeInstallerCountValueAction, changeMilageTextValueAction, changePayStatusAction, changeProcuremetStatusAction, changeSKZIStatusAction, writeDataToStorage } from '../../store/actions.ts/issueActions';
+import { changeAddressTextAction, changeASNrelayStateAction, changeASNstatusAction, changeCardMakingStatusAction, changeCityStateAction, changeDayToWorkValueAction, changeDescriptionTextAction, changeFirmStateAction, changeHistoryAction, changeInstallerCountValueAction, changeMilageTextValueAction, changePayStatusAction, changeProcuremetStatusAction, changeSKZIStatusAction, writeDataToStorage } from '../../store/actions.ts/issueActions';
 import { getIssueFromDB } from '../issueHTTPmethods';
 import { API_URL } from '../DBconfig';
 
@@ -138,6 +138,17 @@ export function* changeDescriptionWorker(action:ActionInterface){
 export function* changeDescriptionWatcher(){
   yield takeEvery('ASYNC_CHANGE_ISSUE_DESCRIPTION', changeDescriptionWorker)
 }
+
+
+export function* changeHistoryWorker(action:{type:string, payload:[]}){
+ const payload:[] = yield action.payload
+ yield put(changeHistoryAction(payload))
+}
+
+export function* changeHistoryWatcher(){
+  yield takeEvery('ASYNC_CHANGE_HISTORY',changeHistoryWorker)
+}
+
 export function* rootWatcher(){
   yield all([
     fork(watchGetIssue),
@@ -154,6 +165,7 @@ export function* rootWatcher(){
     fork(changeDaysToWorkWatcher),
     fork(changeInstallerWatcher),
     fork(changeDescriptionWatcher),
+    fork(changeHistoryWatcher),
   ])
 }
 
